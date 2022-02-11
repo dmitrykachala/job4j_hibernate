@@ -21,5 +21,11 @@
         <mapping class="ru.job4j.hibernate.model.Brand"/>
         <mapping class="ru.job4j.hibernate.model.Model"/>
 
+        <mapping class="ru.job4j.manytomany.Address"/>
+        <mapping class="ru.job4j.manytomany.Person"/>
+
+        <mapping class="ru.job4j.manytomany.model.Book"/>
+        <mapping class="ru.job4j.manytomany.model.Author"/>
+
     </session-factory>
 </hibernate-configuration>
