@@ -13,7 +13,8 @@ public class Brand {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+
+    @OneToMany(mappedBy = "brand")
     private List<Model> models = new ArrayList<>();
 
     public static Brand of(String name) {
@@ -42,6 +43,14 @@ public class Brand {
         this.name = name;
     }
 
+    public List<Model> getModels() {
+        return models;
+    }
+
+    public void setModels(List<Model> models) {
+        this.models = models;
+    }
+
     @Override
     public String toString() {
         return "Brand{" + "id=" + id + ", name='" + name + '\'' + '}';
@@ -56,11 +65,12 @@ public class Brand {
             return false;
         }
         Brand brand = (Brand) o;
-        return id == brand.id && Objects.equals(name, brand.name);
+        return id == brand.id && Objects.equals(name, brand.name)
+                && Objects.equals(models, brand.models);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id, name, models);
     }
 }

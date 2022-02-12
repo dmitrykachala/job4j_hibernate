@@ -11,6 +11,9 @@ public class Model {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
+    @ManyToOne
+    @JoinColumn(name = "brand_id")
+    private Brand brand;
 
     public static Model of(String name) {
         Model model = new Model();
@@ -34,9 +37,17 @@ public class Model {
         this.name = name;
     }
 
+    public Brand getBrand() {
+        return brand;
+    }
+
+    public void setBrand(Brand brand) {
+        this.brand = brand;
+    }
+
     @Override
     public String toString() {
-        return "Model{" + "id=" + id + ", name='" + name + '\'' + '}';
+        return "Model{" + "id=" + id + ", name='" + name + '\'' + ", brand=" + brand + '}';
     }
 
     @Override
@@ -48,11 +59,12 @@ public class Model {
             return false;
         }
         Model model = (Model) o;
-        return id == model.id && Objects.equals(name, model.name);
+        return id == model.id && Objects.equals(name, model.name)
+                && Objects.equals(brand, model.brand);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id, name, brand);
     }
 }
