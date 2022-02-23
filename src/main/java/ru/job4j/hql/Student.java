@@ -16,6 +16,9 @@ public class Student {
 
     private String city;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    private Account account;
+
     public static Student of(String name, int age, String city) {
         Student student = new Student();
         student.name = name;
@@ -56,6 +59,14 @@ public class Student {
         this.city = city;
     }
 
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -65,17 +76,18 @@ public class Student {
             return false;
         }
         Student student = (Student) o;
-        return id == student.id;
+        return id == student.id && age == student.age && Objects.equals(name, student.name)
+                && Objects.equals(city, student.city) && Objects.equals(account, student.account);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, name, age, city, account);
     }
 
     @Override
     public String toString() {
-        return "Student{" + "id=" + id + ", name='" + name + '\'' + ", age=" + age
-                + ", city='" + city + '\'' + '}';
+        return "Student{" + "id=" + id + ", name='" + name + '\'' + ", age=" + age + ", city='"
+                + city + '\'' + ", account=" + account + '}';
     }
 }

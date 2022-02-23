@@ -26,7 +26,7 @@
         <mapping class="ru.job4j.manytomany.Address"/>
         <mapping class="ru.job4j.manytomany.Person"/>
 
-        <mapping class="ru.job4j.manytomany.model.Book"/>
+        <!--<mapping class="ru.job4j.manytomany.model.Book"/>-->
         <mapping class="ru.job4j.manytomany.model.Author"/>
 
         <mapping class="ru.job4j.lazy.Category"/>
@@ -35,7 +35,12 @@
         <mapping class="ru.job4j.hibernate.date.Product"/>
 
         <mapping class="ru.job4j.hql.Student"/>
+        <mapping class="ru.job4j.hql.Book"/>
+        <mapping class="ru.job4j.hql.Account"/>
+
         <mapping class="ru.job4j.hql.candidate.Candidate"/>
+        <mapping class="ru.job4j.hql.candidate.Vacancy"/>
+        <mapping class="ru.job4j.hql.candidate.VacancyBase"/>
 
     </session-factory>
 </hibernate-configuration>
