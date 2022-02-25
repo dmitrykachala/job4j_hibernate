@@ -1,6 +1,7 @@
 package ru.job4j.intgration;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,6 +30,24 @@ public class OrdersStoreTest {
         StringBuilder builder = new StringBuilder();
         try (BufferedReader br = new BufferedReader(
                 new InputStreamReader(new FileInputStream("./db/update_001.sql")))
+        ) {
+            br.lines().forEach(line -> builder.append(line).append(System.lineSeparator()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        pool.getConnection().prepareStatement(builder.toString()).executeUpdate();
+    }
+
+    @After
+    public void closeUp() throws SQLException {
+        pool.setDriverClassName("org.hsqldb.jdbcDriver");
+        pool.setUrl("jdbc:hsqldb:mem:tests;sql.syntax_pgs=true");
+        pool.setUsername("sa");
+        pool.setPassword("");
+        pool.setMaxTotal(2);
+        StringBuilder builder = new StringBuilder();
+        try (BufferedReader br = new BufferedReader(
+                new InputStreamReader(new FileInputStream("./db/update_002.sql")))
         ) {
             br.lines().forEach(line -> builder.append(line).append(System.lineSeparator()));
         } catch (IOException e) {
